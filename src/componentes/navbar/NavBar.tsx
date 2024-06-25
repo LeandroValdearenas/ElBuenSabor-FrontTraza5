@@ -1,6 +1,5 @@
 import LogoutButton from "./LogoutButton";
 import ProfileButton from "./ProfileButton";
-import SignUpButton from "./SignUpButton";
 import LoginButton from "./LoginButton";
 import SucursalSelect from "./SucursalSelect";
 import { Rol } from "../../entidades/enums/Rol";

@@ -2,7 +2,6 @@ import PedidoService from "../../servicios/PedidoService";
 import { useEffect, useState } from "react";
 import { useSucursales } from "../../hooks/useSucursales";
 import { LineChart } from "@mui/x-charts";
-import { format } from 'date-fns';
 import { Button } from "react-bootstrap";
 
 function ChartMovimientosMonetarios() {

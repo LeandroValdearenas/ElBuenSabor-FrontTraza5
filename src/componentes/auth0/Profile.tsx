@@ -1,7 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { CircularProgress, Button, TextField, Collapse, Alert } from "@mui/material";
 import EmpleadoService from "../../servicios/EmpleadoService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Empleado from "../../entidades/Empleado";
 import './profile.css';
 import DomicilioForm from "../domicilios/DomicilioForm";

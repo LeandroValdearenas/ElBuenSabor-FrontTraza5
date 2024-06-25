@@ -16,8 +16,6 @@ function Home() {
     const { isLoading } = useAuth0();
 
     const { empleado } = useEmpleado();
-    const { handleChangeEmpresa } = useEmpresas();
-    const { handleChangeSucursal } = useSucursales();
 
     const links = [
         { to: "/empresas", icon: cilBuilding, label: "Empresas" },

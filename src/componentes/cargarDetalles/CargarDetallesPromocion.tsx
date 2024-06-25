@@ -5,6 +5,7 @@ import BtnDelete from "../btnDelete/BtnDelete";
 import PromocionDetalle from "../../entidades/PromocionDetalle";
 import Promocion from "../../entidades/Promocion";
 import ModalDetallesPromocion from "./ModalDetallesPromocion";
+import ArticuloManufacturadoDetalle from "../../entidades/ArticuloManufacturadoDetalle";
 
 function CargarDetallesPromocion({ promocion, handleChange }: { promocion:Promocion, handleChange: (key: keyof object, value: unknown) => void}) {
     const [detalles, setDetalles] = useState<PromocionDetalle []>([]);
@@ -68,7 +69,7 @@ function CargarDetallesPromocion({ promocion, handleChange }: { promocion:Promoc
         </div>
         <div className="fw-bold d-flex justify-content-between">
             <p>Precio total original: ${detalles.reduce((sum, current) => sum + current.cantidad * current.articulo.precioVenta, 0).toLocaleString('es-AR')}</p>
-            <p>Costo total: ${detalles.reduce((sum, current) => sum + current.cantidad * (current.articulo.articuloManufacturadoDetalles?.reduce((sumManufacturado, currentManufacturado) => sumManufacturado + currentManufacturado.articuloInsumo.precioCompra * currentManufacturado.cantidad, 0) ?? current.articulo.precioCompra ?? 0), 0).toLocaleString('es-AR')}</p>
+            <p>Costo total: ${detalles.reduce((sum, current) => sum + current.cantidad * (current.articulo.articuloManufacturadoDetalles?.reduce((sumManufacturado:number, currentManufacturado:ArticuloManufacturadoDetalle) => sumManufacturado + currentManufacturado.articuloInsumo.precioCompra * currentManufacturado.cantidad, 0) ?? current.articulo.precioCompra ?? 0), 0).toLocaleString('es-AR')}</p>
         </div>
         </div>
     </div>
