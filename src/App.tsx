@@ -71,6 +71,7 @@ export default function App() {
                     <Suspense fallback={<LoaderPage />}>
                         <Routes>
                             <Route path="/" element={<Home />} />
+                            <Route path="/callback" element={<Home />} />
 
                             <Route path="/empleado/perfil" element={
                                 <RutaPrivada><AuthenticationGuard component={EmpleadoProfilePage} />

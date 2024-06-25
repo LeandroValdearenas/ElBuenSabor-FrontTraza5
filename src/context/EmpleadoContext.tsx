@@ -32,7 +32,7 @@ export function EmpleadoContextProvider({ children }: { children: ReactNode }) {
         catch (e) {
             localStorage.setItem("usuario", "");
             setEmpleado(undefined);
-            logout({logoutParams : { returnTo: "/"}}).then(() => localStorage.setItem("usuario", ""))
+            logout({logoutParams : { returnTo: ""}}).then(() => localStorage.setItem("usuario", ""))
             alert(e);
         }
     }

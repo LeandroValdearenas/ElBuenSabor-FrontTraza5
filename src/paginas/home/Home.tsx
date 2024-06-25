@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { Rol } from "../../entidades/enums/Rol";
 import { useEmpleado } from "../../hooks/useEmpleado";
 import { useAuth0 } from '@auth0/auth0-react';
+import { Alert } from '@mui/material';
 
 function Home() {
     const { empresaSeleccionada } = useEmpresas();
@@ -103,11 +104,17 @@ function Home() {
             </div>
 
             ) : ( !isLoading && !empleado
-            ? <div className="container text-center">
-                <h1 className="mb-4">Bienvenido a {empresaSeleccionada.nombre}</h1>
-                <img src={empresaSeleccionada.imagen.url} className='col-6 rounded' />
-                <h4 className="m-3">Inicie sesión para continuar</h4>
-                </div>
+            ? (empresaSeleccionada.id 
+                ?   <div className="container text-center">
+                        <h1 className="mb-4">Bienvenido a {empresaSeleccionada.nombre}</h1>
+                        <img src={empresaSeleccionada.imagen.url} className='col-6 rounded' />
+                        <h4 className="m-3">Inicie sesión para continuar</h4>
+                    </div>
+                :   <div className="container text-center">
+                        <h1 className="mb-4">Bienvenido al Buen Sabor</h1>
+                        <Alert severity="warning">Ocurrió un error al buscar los datos.</Alert>
+                    </div>
+            )
             : <LoaderPage/>)}
         </div>
     );
