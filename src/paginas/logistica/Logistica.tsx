@@ -44,7 +44,7 @@ const Logistica = () => {
     useEffect(() => {
         getPedidosRest();
 
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS('http://localhost:8080/wss');
         const stompClient = new Client({
             webSocketFactory: () => socket,
             onConnect: () => {
