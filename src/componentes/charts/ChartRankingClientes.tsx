@@ -13,7 +13,7 @@ function ChartRankingClientes() {
     const { sucursalSeleccionada } = useSucursales();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const pedidoService = new PedidoService(urlapi + "/pedidos");
+    const pedidoService = new PedidoService(urlapi + "/api/pedidos");
 
     const handleDescargarExcel = () => {
         pedidoService.getExcelRankingClientes(limite, sucursalSeleccionada.id, desde, hasta, ordenarPorPedidos)

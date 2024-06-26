@@ -28,10 +28,11 @@ Para correr este proyecto, se requiere hacer uso de las siguientes variables de 
 
 ## Credenciales de Prueba
 
-- ADMIN: juancitoadmin@gmail.com : `DefaultPassword123!`
-- CAJERO: juancitocajeres@gmail.com : `DefaultPassword123!`
-- COCINERO: pepitococinas@gmail.com : `DefaultPassword123!`
-- DELIVERY: jorgedeliveres@gmail.com : `DefaultPassword123!`
+- SUPERADMIN: superadmin@elbuensabor.com : `DefaultPassword123!`
+- ADMIN: juancitoadmin@elbuensabor.com : `DefaultPassword123!`
+- CAJERO: juancitocajeres@elbuensabor.com : `DefaultPassword123!`
+- COCINERO: pepitococinas@elbuensabor.com : `DefaultPassword123!`
+- DELIVERY: jorgedeliveres@elbuensabor.com : `DefaultPassword123!`
 
 
 ## Despliegue

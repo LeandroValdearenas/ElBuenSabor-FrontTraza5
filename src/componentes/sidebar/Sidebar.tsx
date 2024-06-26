@@ -13,8 +13,8 @@ function Sidebar() {
 
     const links = [
         { to: "/", label: "EmpresaSelect", component: <EmpresaSelect /> },
-        { to: "/empresas", icon: cilBuilding, label: "Empresas" },
-        { to: "/sucursales", icon: cilIndustry, label: "Sucursales" },
+        { to: "/empresas", icon: cilBuilding, label: "Empresas", superAdmin: true },
+        { to: "/sucursales", icon: cilIndustry, label: "Sucursales", superAdmin: true },
         {
             label: "Articulos", icon: cilFastfood, subItems: [
                 { to: "/categorias", label: "Categorías" },
@@ -42,12 +42,14 @@ function Sidebar() {
     return (
         <div className="d-flex">
             {empleado 
-            && empleado.rol === Rol.Administrador 
+            && (empleado.rol === Rol.Administrador || empleado.rol === Rol.Superadmin )
             && (
                  <CSidebar className="collapse border-end d-md-block d-block sidebar" id="sidebarCollapse" style={{ position: 'relative', height: '100%', backgroundColor: '#E0E0E0' }} unfoldable>
                     <CSidebarNav>
                         {links.map((link, index) => (
-                            link.subItems ? (
+                            !link.superAdmin || empleado.rol === Rol.Superadmin ? (
+                            link.subItems 
+                            ? (
                                 <CNavGroup key={index} toggler={<><CIcon customClassName="nav-icon" icon={link.icon} />{link.label}</>}>
                                     {link.subItems.map((subLink, subIndex) => (
                                         <CNavItem key={subIndex}>
@@ -66,6 +68,7 @@ function Sidebar() {
                                     </NavLink>
                                 </CNavItem>
                             )
+                        ) : <div key={index}></div>
                         ))}
                     </CSidebarNav>
                 </CSidebar>

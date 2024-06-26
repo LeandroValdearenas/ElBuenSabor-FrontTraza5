@@ -16,11 +16,11 @@ export function EmpleadoContextProvider({ children }: { children: ReactNode }) {
     const { isLoading, user, logout } = useAuth0();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const empleadoService = new EmpleadoService(urlapi + "/empleados");
+    const empleadoService = new EmpleadoService(urlapi + "/api/empleados");
 
     const handleReloadEmpleado = async () => {
         try {
-            const usuario = await empleadoService.buscarXUsuarioAuth0(user?.sub?.replace('auth0|', ''));
+            const usuario = await empleadoService.buscarXUsuarioAuth0(user?.sub);
 
             if (usuario) {
                 localStorage.setItem("usuario", JSON.stringify(usuario));

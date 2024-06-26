@@ -9,6 +9,10 @@ const LoginButton = () => {
                 appState: {
                     returnTo: window.location.pathname,
                 },
+                authorizationParams: {
+                    initialScreen: "login"
+                },
+                
             })
         }
         className="btn btn-primary mx-2"

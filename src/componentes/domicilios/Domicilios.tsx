@@ -75,7 +75,7 @@ function Domicilios({ domicilios, editar = false, handleChange }: DomiciliosArgs
             { show 
                 && <div className="modal-backdrop fade show"></div> 
             }
-            <Modal show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Domicilio</Modal.Title>
                 </Modal.Header>

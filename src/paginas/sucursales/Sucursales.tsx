@@ -21,7 +21,7 @@ export default function Sucursales() {
     const { empresas, handleReloadEmpresa } = useEmpresas();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const sucursalService = new SucursalService(urlapi + "/sucursales");
+    const sucursalService = new SucursalService(urlapi + "/api/sucursales");
 
     const handleCloseSucursal = () => {
         setShowSucursal(false);
@@ -153,7 +153,6 @@ export default function Sucursales() {
                     <Form>
                         <div className='row'>
                             <div className='col-lg d-flex flex-column justify-content-between'>
-                                
                                 <Form.Group className="mb-3" controlId="nombre">
                                     <Form.Label>Nombre</Form.Label>
                                     <Form.Control
@@ -178,15 +177,17 @@ export default function Sucursales() {
 
                                 <Form.Group className="d-flex flex-column h-100" controlId="domicilio">
                                     <Form.Label>Domicilio</Form.Label>
-                                    <DomicilioForm errors={errorsSucursal} domicilio={sucursal.domicilio} handleChangeDomicilio={(key, value) => setSucursal(prevState => ({
-                                        ...prevState,
-                                        [key]: value
-                                    }))} />
+                                    <div className="border rounded p-2 h-100">
+                                        <DomicilioForm errors={errorsSucursal} domicilio={sucursal.domicilio} handleChangeDomicilio={(key, value) => setSucursal(prevState => ({
+                                            ...prevState,
+                                            [key]: value
+                                        }))} />
+                                    </div>
                                 {errorsSucursal['domicilio'] && <div className='ms-1 mt-1 text-danger'>{errorsSucursal['domicilio']}</div>}
                                 </Form.Group>
                             </div>
-                            <div className='col-lg d-flex flex-column justify-content-between'>
 
+                            <div className='col-lg d-flex flex-column justify-content-between'>
                                 <Form.Group className="mb-3" controlId="imagen">
                                     <Form.Label>Imágen</Form.Label>
                                     <CargarImagen imagen={sucursal.imagen} handleChange={(key, value) => setSucursal(prevState => ({

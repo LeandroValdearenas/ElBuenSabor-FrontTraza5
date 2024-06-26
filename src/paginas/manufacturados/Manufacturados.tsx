@@ -53,7 +53,7 @@ const Manufacturados = () => {
   const { categorias, unidadesMedida, getCategoriasRest, getUnidadesMedidaRest } = useAtributos();
 
   const urlapi = import.meta.env.VITE_API_URL;
-  const articuloManufacturadoService = new ArticuloManufacturadoService(urlapi + "/manufacturados");
+  const articuloManufacturadoService = new ArticuloManufacturadoService(urlapi + "/api/manufacturados");
 
   const getManufacturadosRest = useCallback(async () => {
     try {
@@ -596,7 +596,7 @@ const Manufacturados = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {manufacturados.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+              {manufacturados.length > 0 && manufacturados.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                 <Row key={row.id} row={row} />
               ))}
               {emptyRows > 0 && (

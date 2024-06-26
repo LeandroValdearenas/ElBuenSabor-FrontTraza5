@@ -71,15 +71,19 @@ export default function App() {
                     <Suspense fallback={<LoaderPage />}>
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/callback" element={<Home />} />
+                            <Route path="/callback" element={<LoaderPage />} />
 
                             <Route path="/empleado/perfil" element={
                                 <RutaPrivada><AuthenticationGuard component={EmpleadoProfilePage} />
                                 </RutaPrivada>}
                             />
-                            <Route element={<RutaPrivadaRol rol={Rol.Administrador} />}>
+
+                            <Route element={<RutaPrivadaRol roles={[Rol.Superadmin]} />}>
                                 <Route path="empresas" element={<AuthenticationGuard component={Empresas} />} />
                                 <Route path="sucursales" element={<AuthenticationGuard component={Sucursales} />} />
+                            </Route>
+
+                            <Route element={<RutaPrivadaRol roles={[Rol.Administrador, Rol.Superadmin]} />}>
                                 <Route path="unidadesmedida" element={<AuthenticationGuard component={UnidadesMedida} />} />
                                 <Route path="insumos" element={<AuthenticationGuard component={Insumos} />} />
                                 <Route path="manufacturados" element={<AuthenticationGuard component={Manufacturados} />} />
@@ -92,21 +96,21 @@ export default function App() {
                                 <Route path="pedidos" element={<AuthenticationGuard component={PedidosClientes} />} />
                             </Route>
 
-                            <Route element={<RutaPrivadaRol rol={Rol.Cajero} />}>
+                            <Route element={<RutaPrivadaRol roles={[Rol.Cajero]} />}>
                                 <Route
                                     path="/caja"
                                     element={<AuthenticationGuard component={Caja} />}
                                 />
                             </Route>
 
-                            <Route element={<RutaPrivadaRol rol={Rol.Cocinero} />}>
+                            <Route element={<RutaPrivadaRol roles={[Rol.Cocinero]} />}>
                                 <Route
                                     path="/produccion"
                                     element={<AuthenticationGuard component={Produccion} />}
                                 />
                             </Route>
 
-                            <Route element={<RutaPrivadaRol rol={Rol.Delivery} />}>
+                            <Route element={<RutaPrivadaRol roles={[Rol.Delivery]} />}>
                                 <Route
                                     path="/logistica"
                                     element={<AuthenticationGuard component={Logistica} />}

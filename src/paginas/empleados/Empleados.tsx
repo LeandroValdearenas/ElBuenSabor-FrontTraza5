@@ -19,12 +19,11 @@ const Empleados = () => {
     const {sucursalSeleccionada} = useSucursales();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const empleadoService = new EmpleadoService(urlapi + "/empleados");
+    const empleadoService = new EmpleadoService(urlapi + "/api/empleados");
 
     const getEmpleadosRest = async () => {
         const datos: Empleado[] = await empleadoService.buscarXSucursal(mostrarVisibles ? sucursalSeleccionada.id : 0, busqueda);
-        const empleadosFiltrados = datos;
-        setEmpleados(empleadosFiltrados);
+        setEmpleados(datos);
     }
 
     const handleEliminar = async (empleado:Empleado) => {

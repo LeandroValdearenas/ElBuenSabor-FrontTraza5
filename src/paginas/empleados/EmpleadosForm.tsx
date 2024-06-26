@@ -163,10 +163,12 @@ function EmpleadosForm({ show, handleClose, empleado, setEmpleado, getEmpleadosR
 
                                 <Form.Group className="mb-5" controlId="domicilio">
                                     <Form.Label>Domicilio</Form.Label>
-                                    <DomicilioForm domicilio={empleado.domicilio} errors={errors} handleChangeDomicilio={(key, value) => setEmpleado((prevState:Empleado) => ({
-                                        ...prevState,
-                                        [key]: value
-                                    }))} />
+                                    <div className="border rounded p-2">
+                                        <DomicilioForm domicilio={empleado.domicilio} errors={errors} handleChangeDomicilio={(key, value) => setEmpleado((prevState:Empleado) => ({
+                                            ...prevState,
+                                            [key]: value
+                                        }))} />
+                                    </div>
                                 </Form.Group>
                             </div>
                             <div className='col-lg d-flex flex-column justify-content-between'>

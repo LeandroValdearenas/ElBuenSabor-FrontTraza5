@@ -29,8 +29,8 @@ export function AtributosContextProvider({children} : {children: ReactNode}) {
     const [unidadesMedida, setUnidadesMedida] = useState<UnidadMedida []>([]);
   
     const urlapi = import.meta.env.VITE_API_URL;
-    const categoriaService = new CategoriaService(urlapi + "/categorias");
-    const unidadMedidaService = new UnidadMedidaService(urlapi + "/unidadesmedida");
+    const categoriaService = new CategoriaService(urlapi + "/api/categorias");
+    const unidadMedidaService = new UnidadMedidaService(urlapi + "/api/unidadesmedida");
 
     const getCategoriasRest = async () => {
         const categorias:Categoria[] = (await categoriaService.getAll()).filter(c => c.sucursales?.map(s => s.id).includes(sucursalSeleccionada.id)).sort((a,b) => a.denominacion < b.denominacion ? -1 : 1);

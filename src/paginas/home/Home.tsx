@@ -19,8 +19,8 @@ function Home() {
     const { empleado } = useEmpleado();
 
     const links = [
-        { to: "/empresas", icon: cilBuilding, label: "Empresas" },
-        { to: "/sucursales", icon: cilIndustry, label: "Sucursales" },
+        { to: "/empresas", icon: cilBuilding, label: "Empresas", superadmin: true },
+        { to: "/sucursales", icon: cilIndustry, label: "Sucursales", superadmin: true },
         { to: "/categorias", icon: cilFastfood, label: "Categorías" },
         { to: "/unidadesmedida", icon: cilFastfood, label: "Unidades de Medida" },
         { to: "/insumos", icon: cilFastfood, label: "Insumos" },
@@ -32,37 +32,31 @@ function Home() {
         { to: "/estadisticas", icon: cilBarChart, label: "Estadísticas" },
     ];
 
-    const pastelColors = [
-        "#FFC5C5", // light red
-        "#FFDFCA", // light orange
-        "#FFFFBA", // light yellow
-        "#BAFFC9", // light green
-        "#BAE1FF", // light blue
-        "#FFD3DE", // light pink
-    ];
-
     const redirigirUsuario = () => {
         if (empleado && empleado.sucursal) {
             switch (empleado.rol) {
                 case Rol.Administrador: 
                     break;
+                case Rol.Superadmin: 
+                    break;
                 case Rol.Cajero: 
-                    if (window.location.pathname !== '/caja') {
+                    if (window.location.pathname !== '/caja' && window.location.pathname !== '/callback') {
+                        console.log('a')
                         window.location.href = '/caja';
                     }
                     break;
                 case Rol.Delivery: 
-                    if (window.location.pathname !== '/logistica') {
+                    if (window.location.pathname !== '/logistica' && window.location.pathname !== '/callback') {
                         window.location.href = '/logistica';
                     }
                     break;
                 case Rol.Cocinero: 
-                    if (window.location.pathname !== '/produccion') {
+                    if (window.location.pathname !== '/produccion' && window.location.pathname !== '/callback') {
                         window.location.href = '/produccion';
                     }
                     break;
                 default: 
-                    if (window.location.pathname !== '/') {
+                    if (window.location.pathname !== '/' && window.location.pathname !== '/callback') {
                         window.location.href = '/';
                     }
             }
@@ -76,7 +70,7 @@ function Home() {
 
     return (
         <div className="container-fluid py-4">
-            {empleado && empleado.rol === Rol.Administrador ? (
+            {empleado && (empleado.rol === Rol.Administrador || empleado.rol === Rol.Superadmin) ? (
             <div className="container text-center">
                 <h1 className="mb-4">Bienvenido a {empresaSeleccionada.nombre}</h1>
                 <h2 className="mb-3">{sucursalSeleccionada.nombre}</h2>
@@ -84,20 +78,23 @@ function Home() {
                 <Container>
                     <Row>
                         {links.map((link, index) => (
-                            <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                                <Card style={{ backgroundColor: pastelColors[index % pastelColors.length], height: "100%" }}>
-                                    <NavLink to={link.to} className="nav-link" style={{ textDecoration: "none", color: "inherit" }}>
-                                        <Card.Body className="d-flex flex-column justify-content-between">
-                                            <div>
-                                                <Card.Header className="border rounded" style={{ backgroundColor: '#FFFFFFAA', marginBottom: "10px" }}>
-                                                    <CIcon customClassName="nav-icon" icon={link.icon} size="xl" height={60} />
-                                                </Card.Header>
-                                                <Card.Title className="text-center">{link.label}</Card.Title>
-                                            </div>
-                                        </Card.Body>
-                                    </NavLink>
-                                </Card>
-                            </Col>
+                            (!link.superadmin || empleado.rol === Rol.Superadmin 
+                            ?   <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                                    <Card style={{ backgroundColor: '#CCC', height: "100%" }}>
+                                        <NavLink to={link.to} className="nav-link" style={{ textDecoration: "none", color: "inherit" }}>
+                                            <Card.Body className="d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <Card.Header className="border rounded" style={{ backgroundColor: '#FFFFFFAA', marginBottom: "10px" }}>
+                                                        <CIcon customClassName="nav-icon" icon={link.icon} size="xl" height={60} />
+                                                    </Card.Header>
+                                                    <Card.Title className="text-center">{link.label}</Card.Title>
+                                                </div>
+                                            </Card.Body>
+                                        </NavLink>
+                                    </Card>
+                                </Col>
+                            :   <div key={index}></div>
+                            )
                         ))}
                     </Row>
                 </Container>

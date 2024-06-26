@@ -15,7 +15,7 @@ export default function Empresas() {
 
     const urlcliente = import.meta.env.VITE_FRONT_CLIENT_URL;
     const urlapi = import.meta.env.VITE_API_URL;
-    const empresasService = new EmpresaService(urlapi + "/empresas");
+    const empresasService = new EmpresaService(urlapi + "/api/empresas");
 
     const handleCloseEmpresa = () => {
         setShowEmpresa(false);

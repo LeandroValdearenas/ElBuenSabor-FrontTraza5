@@ -36,7 +36,7 @@ const Clientes = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const clienteService = new ClienteService(urlapi + "/clientes");
+    const clienteService = new ClienteService(urlapi + "/api/clientes");
 
     const getClientesRest = async () => {
         const datos: Cliente[] = await clienteService.buscarXNombre(busqueda, !mostrarVisibles);

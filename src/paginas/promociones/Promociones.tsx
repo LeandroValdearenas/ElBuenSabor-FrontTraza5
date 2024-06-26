@@ -43,7 +43,7 @@ const Promociones = () => {
     const {sucursales, sucursalSeleccionada} = useSucursales();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const promocionService = new PromocionService(urlapi + "/promociones");
+    const promocionService = new PromocionService(urlapi + "/api/promociones");
 
     const handleEliminarEnSucursal = async (promocionCambiada: Promocion) => {
         if (promocionCambiada.sucursales?.map(s => s.id).includes(sucursalSeleccionada.id))

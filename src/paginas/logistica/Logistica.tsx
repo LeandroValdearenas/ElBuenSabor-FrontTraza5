@@ -16,7 +16,7 @@ const Logistica = () => {
     const { sucursalSeleccionada } = useSucursales();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const pedidoService = new PedidoService(urlapi + "/pedidos");
+    const pedidoService = new PedidoService(urlapi + "/api/pedidos");
 
     const getPedidosRest = async () => {
       const datos: Pedido[] = await pedidoService.buscarXSucursal(sucursalSeleccionada.id, "", "", "", Estados.EN_DELIVERY);
@@ -44,7 +44,7 @@ const Logistica = () => {
     useEffect(() => {
         getPedidosRest();
 
-        const socket = new SockJS('http://localhost:8080/wss');
+        const socket = new SockJS(urlapi + '/wss');
         const stompClient = new Client({
             webSocketFactory: () => socket,
             onConnect: () => {

@@ -12,7 +12,7 @@ function ChartMovimientosMonetarios() {
     const { sucursalSeleccionada } = useSucursales();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const pedidoService = new PedidoService(urlapi + "/pedidos");
+    const pedidoService = new PedidoService(urlapi + "/api/pedidos");
 
     useEffect(() => {
         if (sucursalSeleccionada) {

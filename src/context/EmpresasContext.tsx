@@ -21,7 +21,7 @@ export function EmpresasContextProvider({ children }: { children: ReactNode }) {
     const [empresaSeleccionada, setEmpresaSeleccionada] = useState<Empresa>(new Empresa());
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const empresasService = new EmpresaService(urlapi + "/empresas");
+    const empresasService = new EmpresaService(urlapi + "/api/empresas");
 
     const handleChangeEmpresa = (empresaId:number) => {
         setEmpresaSeleccionada(empresas.find(e => e.id === empresaId) ?? new Empresa());

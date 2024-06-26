@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import Pedido from "../../entidades/Pedido";
 import DetallePedido from "../../entidades/DetallePedido";
 import { FormaPago } from "../../entidades/enums/FormaPago";
-import Promocion from "../../entidades/Promocion";
 
 export default function TablePedido({pedido}:{pedido:Pedido}) {
     const [subtotal, setSubtotal] = useState<number>(0);
     const [costoEnvioTotal, ] = useState<number>(0);
 
     useEffect(() => {
-        setSubtotal(pedido.detallePedidos.reduce((suma, detalle) => suma + (detalle.articulo.precioVenta ?? (detalle.articulo as Promocion).precioPromocional) * detalle.cantidad, 0));
+        setSubtotal(pedido.detallePedidos.reduce((suma, detalle) => suma + (detalle.articulo.precioVenta ?? detalle.articulo.precioPromocional) * detalle.cantidad, 0));
     }, [pedido]);
 
     return (
@@ -26,9 +25,9 @@ export default function TablePedido({pedido}:{pedido:Pedido}) {
             {pedido.detallePedidos.map((detalle: DetallePedido) => (
                 <tr key={detalle.articulo.id}>
                     <td> {detalle.articulo.denominacion} </td>
-                    <td> ${(detalle.articulo.precioVenta ?? (detalle.articulo as Promocion).precioPromocional).toLocaleString('es-AR')} </td>
+                    <td> ${(detalle.articulo.precioVenta ?? detalle.articulo.precioPromocional).toLocaleString('es-AR')} </td>
                     <td> {detalle.cantidad.toLocaleString('es-AR')} </td>
-                    <td> ${(detalle.cantidad * (detalle.articulo.precioVenta ?? (detalle.articulo as Promocion).precioPromocional)).toLocaleString('es-AR')} </td>
+                    <td> ${(detalle.cantidad * (detalle.articulo.precioVenta ?? detalle.articulo.precioPromocional)).toLocaleString('es-AR')} </td>
                 </tr>
             ))}
             {(subtotal > 0) 

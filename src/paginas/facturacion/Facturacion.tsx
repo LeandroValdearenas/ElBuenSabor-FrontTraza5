@@ -35,7 +35,7 @@ const Facturacion = () => {
     const estados = [...Object.keys(Estado).map((e, index) => ({id:index+1, denominacion:e}))];
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const pedidoService = new PedidoService(urlapi + "/pedidos");
+    const pedidoService = new PedidoService(urlapi + "/api/pedidos");
 
     const handleFacturar = (pedidoId: number) => {
       pedidoService.facturarPedido(pedidoId);
@@ -146,8 +146,8 @@ const Facturacion = () => {
                               {detalle.articulo.denominacion}
                             </TableCell>
                             <TableCell>{detalle.cantidad.toLocaleString('es-AR')}</TableCell>
-                            <TableCell>${detalle.articulo.precioVenta.toLocaleString('es-AR')}</TableCell>
-                            <TableCell>${(detalle.cantidad*detalle.articulo.precioVenta).toLocaleString('es-AR')}</TableCell>
+                            <TableCell>${(detalle.articulo.precioVenta ?? detalle.articulo.precioPromocional).toLocaleString('es-AR')}</TableCell>
+                            <TableCell>${(detalle.cantidad * (detalle.articulo.precioVenta ?? detalle.articulo.precioPromocional)).toLocaleString('es-AR')}</TableCell>
                           </TableRow>
                         ))}
                         <TableRow key='subtotal'>

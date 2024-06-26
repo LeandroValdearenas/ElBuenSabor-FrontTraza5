@@ -5,9 +5,12 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useEmpresas } from '../../hooks/useEmpresas';
+import { useEmpleado } from '../../hooks/useEmpleado';
+import { Rol } from '../../entidades/enums/Rol';
 
 export default function EmpresaSelect() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const {empleado} = useEmpleado();
   const {empresas, empresaSeleccionada, handleChangeEmpresa} = useEmpresas();
 
   const open = Boolean(anchorEl);
@@ -31,7 +34,6 @@ export default function EmpresaSelect() {
       <List
         component="nav"
         aria-label="Device settings"
-        
       >
         <div className="" style={{ alignItems:'center',justifyContent:'center', display:'flex', overflow:'hidden'}} >
         <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +47,7 @@ export default function EmpresaSelect() {
           aria-controls="lock-menu"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClickListItem}
-          
+          disabled={empleado?.rol !== Rol.Superadmin}
         >
           
           <ListItemText

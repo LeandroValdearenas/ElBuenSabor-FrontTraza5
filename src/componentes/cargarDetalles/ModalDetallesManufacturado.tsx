@@ -83,7 +83,7 @@ function ModalDetallesManufacturado({
   ];
 
   const urlapi = import.meta.env.VITE_API_URL;
-  const articuloInsumoService = new ArticuloInsumoService(urlapi + "/insumos");
+  const articuloInsumoService = new ArticuloInsumoService(urlapi + "/api/insumos");
 
   const getInsumosRest = async () => {
     const datos: ArticuloInsumo[] = (await articuloInsumoService.buscarXDenominacion(busqueda))

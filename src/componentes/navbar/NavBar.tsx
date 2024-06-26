@@ -26,7 +26,7 @@ function NavBar({ currentPage } : { currentPage:string }) {
 
         {empleado
           ? <>
-              {empleado.rol === Rol.Administrador
+              {empleado.rol === Rol.Superadmin
                 ? <>
                     <button className="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse">
                       <span className="navbar-toggler-icon"></span>

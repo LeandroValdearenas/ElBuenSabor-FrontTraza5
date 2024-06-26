@@ -14,7 +14,7 @@ function UnidadesMedidaForm() {
     const {unidadesMedida, setUnidadesMedida} = useAtributos();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const unidadesMedidaService = new UnidadMedidaService(urlapi + "/unidadesmedida");
+    const unidadesMedidaService = new UnidadMedidaService(urlapi + "/api/unidadesmedida");
 
     const getUnidadesMedidaRest = async () => {
         const nuevasUnidades:UnidadMedida[] = await unidadesMedidaService.getAll();

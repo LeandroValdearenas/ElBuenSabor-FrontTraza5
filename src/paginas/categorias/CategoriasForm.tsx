@@ -15,7 +15,7 @@ function CategoriasForm() {
     const {categorias, setCategorias} = useAtributos();
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const categoriaService = new CategoriaService(urlapi + "/categorias");
+    const categoriaService = new CategoriaService(urlapi + "/api/categorias");
 
     const getCategoriasRest = async () => {
         const nuevasCategorias: Categoria[] = await categoriaService.getAll();

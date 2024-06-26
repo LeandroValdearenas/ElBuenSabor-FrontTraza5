@@ -86,7 +86,7 @@ const Horarios: React.FC<HorariosArgs> = ({ horarios, handleChange }) => {
                 </Modal.Body>
             </Modal>
 
-            <div style={{ overflowY: "scroll", height: "300px" }}>
+            <div style={{ overflowY: "scroll", minHeight:"100px", maxHeight: "300px" }}>
                 <div className="mx-3">
                     {horarios.map((horario) =>
                         <MostrarHorario key={horario.id} horarioPrevio={horario} handleOpenModal={handleShow} handleDelete={handleDeleteHorario} />

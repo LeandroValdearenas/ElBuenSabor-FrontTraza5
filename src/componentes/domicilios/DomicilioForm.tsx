@@ -24,9 +24,9 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
     const [selectedLocalidad, setSelectedLocalidad] = useState<Localidad>(new Localidad());
 
     const urlapi = import.meta.env.VITE_API_URL;
-    const localidadService = new LocalidadService(urlapi + "/localidades");
-    const provinciaService = new ProvinciaService(urlapi + "/provincias");
-    const paisService = new PaisService(urlapi + "/paises");
+    const localidadService = new LocalidadService(urlapi + "/api/localidades");
+    const provinciaService = new ProvinciaService(urlapi + "/api/provincias");
+    const paisService = new PaisService(urlapi + "/api/paises");
 
     const getLocalidadesRest = async (idProvincia?:number) => {
         const localidades = await localidadService.getAll();
@@ -110,9 +110,9 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
     }, [selectedLocalidad]);
     
     return (
-    <div className="d-flex flex-column h-100 mb-3 p-3 border rounded justify-content-between" >
+    <div className="d-flex flex-column h-100 justify-content-between" >
         <div className="mb-3 row">
-            <div className="col-9">
+            <div className="col-6">
                 <label htmlFor="calle" className="form-label">Calle</label>
                 <input
                     type='text'
@@ -122,7 +122,7 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
                     onChange={(e) => handleChange('calle', e.target.value)}
                     required
                     />
-            {errors['domicilio.calle'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.calle']}</div>}
+                {errors['domicilio.calle'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.calle']}</div>}
             </div>
             <div className="col-3">
                 <label htmlFor="numero" className="form-label">Número</label>
@@ -135,7 +135,20 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
                     onChange={(e) => handleChange('numero', e.target.value)}
                     required
                     />
-            {errors['domicilio.numero'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.numero']}</div>}
+                {errors['domicilio.numero'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.numero']}</div>}
+            </div>
+            <div className="col-3">
+                <label htmlFor="cp" className="form-label">Código postal</label>
+                <input
+                    type='number'
+                    min={0}
+                    id='cp'
+                    className='form-control'
+                    value={domicilio.cp}
+                    onChange={(e) => handleChange('cp', e.target.value)}
+                    required
+                    />
+                {errors['domicilio.cp'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.cp']}</div>}
             </div>
         </div>
         <div className="mb-3 row">
@@ -143,6 +156,7 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
             <Autocomplete
                 disablePortal
                 id="pais"
+                size="small"
                 options={paises}
                 getOptionDisabled={(option) =>
                     option === paises[0]
@@ -159,6 +173,7 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
                 disablePortal
                 disabled={provincias.length === 0 || selectedPais.id === 0}
                 id="provincia"
+                size="small"
                 options={provincias}
                 getOptionDisabled={(option) =>
                     option === provincias[0]
@@ -177,6 +192,7 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
                 disablePortal
                 disabled={localidades.length === 0 || selectedProvincia.id === 0}
                 id="localidad"
+                size="small"
                 options={localidades}
                 getOptionDisabled={(option) =>
                     option === localidades[0]
@@ -187,19 +203,6 @@ function DomicilioForm({domicilio, errors={}, handleChangeDomicilio}:DomiciliosA
                 onChange={(_e, value) => handleChangeLocalidad(value)}
             />
             {errors['domicilio.localidad'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.localidad']}</div>}
-            </div>
-            <div className="col-3">
-                <label htmlFor="cp" className="form-label">Código postal</label>
-                <input
-                    type='number'
-                    min={0}
-                    id='cp'
-                    className='form-control'
-                    value={domicilio.cp}
-                    onChange={(e) => handleChange('cp', e.target.value)}
-                    required
-                    />
-            {errors['domicilio.cp'] && <div className='ms-1 mt-1 text-danger'>{errors['domicilio.cp']}</div>}
             </div>
         </div>
     </div>
